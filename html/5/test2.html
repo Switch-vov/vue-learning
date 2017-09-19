@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 2</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<ul id="example-2">
+    <li v-for="(item, index) in items" :key="item.id">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+</ul>
+<script>
+    var vm = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                {id: 1, message: 'Foo'},
+                {id: 2, message: 'Bar'}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

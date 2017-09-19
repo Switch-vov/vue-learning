@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 3</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<ul id="v-for-object">
+    <li v-for="(value, key, index) in object">
+        {{ index }} . {{ key }} : {{ value }}
+    </li>
+</ul>
+<script>
+    var vm = new Vue({
+        el: '#v-for-object',
+        data: {
+            object: {
+                name: '苹果',
+                price: 10.2,
+                owner : 'Switch'
+            }
+        }
+    });
+</script>
+</body>
+</html>
