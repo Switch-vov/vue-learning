@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 6</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="div1" v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
+    按钮
+</div>
+<div id="div2" v-bind:style="styleObject">
+    按钮
+</div>
+<div id="div3" v-bind:style="[baseStyles, overridingStyles]">
+    按钮
+</div>
+<div id="div4" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+    按钮
+</div>
+<script>
+    var vm = new Vue({
+        el: '#div1',
+        data: {
+            activeColor: 'red',
+            fontSize: 20
+        }
+    });
+    var vm2 = new Vue({
+        el: '#div2',
+        data: {
+            styleObject: {
+                color: 'green',
+                fontSize: '30px'
+            }
+        }
+    });
+    var vm3 = new Vue({
+        el: '#div3',
+        data: {
+            baseStyles: {
+                color: 'blue',
+                fontSize: '40px'
+            },
+            overridingStyles: {
+                textDecoration: 'line-through'
+            }
+        }
+    });
+    var vm4 = new Vue({
+        el: '#div4',
+        data: {
+            color: 'black'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 1</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .static {
+            color: black;
+        }
+        .active {
+            color: red;
+        }
+        .text-danger {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+    按钮
+</div>
+<script>
+    var vm = new Vue({
+        el: '.static',
+        data: {
+            isActive: true,
+            hasError: false
+        }
+    })
+</script>
+</body>
+</html>

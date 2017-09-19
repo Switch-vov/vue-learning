@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 4</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .static {
+            color: black;
+        }
+
+        .static2 {
+            color: aqua;
+        }
+
+        .static3 {
+            color: blue;
+        }
+
+        .active {
+            color: red;
+        }
+
+        .text-danger {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<div class="static" v-bind:class="[activeClass, errorClass]">
+    按钮
+</div>
+<div class="static2" v-bind:class="[isActive ? activeClass : '', errorClass]">
+    按钮2
+</div>
+<div class="static3" v-bind:class="[{ active: isActive }, errorClass]">
+    按钮3
+</div>
+<script>
+    var vm = new Vue({
+        el: '.static',
+        data: {
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+    var vm2 = new Vue({
+        el: '.static2',
+        data: {
+            isActive: true,
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+    var vm3 = new Vue({
+        el: '.static3',
+        data: {
+            isActive: false,
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        }
+    })
+</script>
+</body>
+</html>
