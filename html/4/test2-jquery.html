@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 2</title>
+    <meta name="description" content="Jquery实现切换逻辑">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/jquery.js"></script>
+</head>
+<body>
+<div id="app1">
+    <template v-if="loginType === 'username' ">
+        <label>username</label>：
+        <input placeholder="Enter your username"/>
+    </template>
+    <template v-else>
+        <label>email</label>：
+        <input placeholder="Enter you email address"/>
+    </template>
+    <div>
+        <button id="btn1">Toggle login type</button>
+    </div>
+</div>
+<div id="app2">
+    <template v-if="loginType === 'username' ">
+        <label>username</label>：
+        <input placeholder="Enter your username" key="username-input"/>
+    </template>
+    <template v-else>
+        <label>email</label>：
+        <input placeholder="Enter you email address" key="email-input"/>
+    </template>
+    <div>
+        <button id="btn2">Toggle login type</button>
+    </div>
+</div>
+<script>
+    var username = 'username';
+    var email = 'email';
+    var vm = new Vue({
+        el: '#app1',
+        data: {
+            loginType: username
+        }
+    });
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            loginType: email
+        }
+    });
+    $(function () {
+        $('#btn1').click(function () {
+            var loginType = vm.loginType;
+            loginType = toggleLoginType(loginType);
+            vm.loginType = loginType;
+        });
+        $('#btn2').click(function () {
+            var loginType = vm2.loginType;
+            loginType = toggleLoginType(loginType);
+            vm2.loginType = loginType;
+        });
+    });
+
+    function toggleLoginType(loginType) {
+        if (loginType === username) {
+            loginType = email;
+        } else {
+            loginType = username;
+        }
+        return loginType;
+    }
+</script>
+</body>
+</html>
