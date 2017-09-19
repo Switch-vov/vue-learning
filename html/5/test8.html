@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 8</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="todo in todos" v-if="!todo.isComplete">
+            {{ todo }}
+        </li>
+    </ul>
+    <hr/>
+    <ul v-if="todos.length > 3">
+        <li v-for="todo in todos">
+            {{ todo }}
+        </li>
+    </ul>
+    <button @click="addItem">添加一条记录</button>
+    <hr/>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            todos: [
+                {event: 'code', isComplete: false},
+                {event: 'game', isComplete: true},
+                {event: 'reading', isComplete: false}
+            ]
+        },
+        methods: {
+            addItem: function () {
+                this.todos.push({event: 'watch', isComplete: Math.random() > 0.5});
+            }
+        }
+    })
+</script>
+</body>
+</html>

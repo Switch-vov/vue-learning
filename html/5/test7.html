@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 7</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<ul id="example-7">
+    <template v-for="item in items">
+        <li>{{ item.message }}</li>
+        <li class="divider"></li>
+    </template>
+</ul>
+<script>
+    var vm = new Vue({
+        el: '#example-7',
+        data: {
+            items: [
+                {id: 1, message: 'Foo'},
+                {id: 2, message: 'Bar'}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

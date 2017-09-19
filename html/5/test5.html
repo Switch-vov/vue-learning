@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 5</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="example-5">
+    <h3>{{ userProfile }}</h3>
+    <button @click="addAttr">添加属性</button>
+    <button @click="addMultiAttr">添加多个属性</button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#example-5',
+        data: {
+            userProfile: {
+                name: 'Switch'
+            }
+        },
+        methods: {
+            addAttr: function () {
+                this.$set(this.userProfile, 'gender', 'male')
+            },
+            addMultiAttr: function () {
+                this.userProfile = Object.assign({}, this.userProfile, {
+                    gender: 'male',
+                    email: 'switchvov@163.com'
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>
