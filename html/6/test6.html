@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 6</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<!--
+.enter
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+
+.ctrl
+.alt
+.shift
+.meta
+-->
+<div id="app1">
+    <!-- 只有在 keyCode 是 13 时调用 vm.submit() -->
+    <input v-on:keyup.13="submit">
+    <hr/>
+    <!-- 同上 -->
+    <input v-on:keyup.enter="submit">
+    <hr/>
+    <!-- 缩写语法 -->
+    <input @keyup.enter="submit">
+    <hr/>
+    <!-- Alt + C -->
+    <input @keyup.alt.67="clear">
+    <hr/>
+    <!-- Ctrl + Click -->
+    <div @click.ctrl="doSomething">Do something</div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app1',
+        methods: {
+            clear: function (event) {
+                event.target.value = '';
+            }
+        }
+    })
+</script>
+</body>
+</html>

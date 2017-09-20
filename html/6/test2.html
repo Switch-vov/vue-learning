@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 2</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app1">
+    <button @click="greet">Greet</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app1',
+        data: {
+            name: 'Vue.js'
+        },
+        methods: {
+            greet: function (event) {
+                alert('Hello ' + this.name + '!');
+                if (event) {
+                    alert(event.target.tagName);
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

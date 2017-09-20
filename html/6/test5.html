@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 5</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<!--
+.stop
+.prevent
+.capture
+.self
+.once
+-->
+<div id="app1">
+    <!-- 阻止单击事件冒泡 -->
+    <a @click.stop="doThis">Link</a>
+    <!-- 提交事件不再重载页面 -->
+    <form @submit.prevent="onSubmit">
+        <button type="submit">提交</button>
+    </form>
+    <!-- 修饰符可以串联 -->
+    <a @click.stop.prevent="doThat">Link</a>
+    <!-- 只有修饰符 -->
+    <form @submit.prevent>
+        <button type="submit">提交</button>
+    </form>
+    <!-- 添加事件侦听器时使用事件捕获模式 -->
+    <div @click.capture="doThis">...</div>
+    <!-- 只当事件在该元素本身 (比如不是子元素) 触发时触发回调 -->
+    <div @click.self="doThat">...</div>
+    <!-- 点击事件将只会触发一次 -->
+    <a @click.once="doThis">Link</a>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app1',
+        methods: {
+            doThis: function () {
+                alert('this')
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 3</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app1">
+    <button @click="say('hi')">Say hi</button>
+    <button @click="say('what')">Say what</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app1',
+        methods: {
+            say: function (message) {
+                alert(message);
+            }
+        }
+    })
+</script>
+</body>
+</html>
