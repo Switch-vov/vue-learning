@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 1</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .c1 {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <ol>
+        <li is="my-component" class="c1"></li>
+    </ol>
+</div>
+<script>
+    Vue.component("my-component", {
+        template: '<li>Hi</li>'
+    });
+    var vm = new Vue({
+        el: '#app',
+
+    })
+</script>
+</body>
+</html>
