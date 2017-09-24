@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 7</title>
+    <meta name="description" content="父子组件属性双向绑定">
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<!--
+<comp :foo.sync="bar"></comp>
+<comp :foo.sync="bar"></comp>
+会被扩展为：
+<comp :foo="bar" @update:foo="val => bar = val"></comp>
+当子组件需要更新 foo 的值时，它需要显式地触发一个更新事件：
+this.$emit('update:foo', newValue)
+-->
+<div id="app">
+    <p> {{ parentValue }} </p>
+    <button is="my-button" :parent-value.sync="parentValue" :child-value="parentValue"></button>
+</div>
+<script>
+    Vue.component('my-button', {
+        props: ['childValue'],
+        template: '<button @click="incrementParent">{{ childValue }}</button>',
+        methods: {
+            incrementParent: function () {
+                this.$emit('update:parentValue', parseInt(Math.random() * 100));
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            parentValue: 0
+        }
+    });
+</script>
+</body>
+</html>

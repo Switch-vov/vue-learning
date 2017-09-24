@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 4</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+type 可以是下面原生构造器：
+String
+Number
+Boolean
+Function
+Object
+Array
+Symbol
+type 也可以是一个自定义构造器函数，使用 instanceof 检测。
+-->
+<body>
+<div id="app">
+    PA:<input v-model="parentPA">
+    PB:<input v-model="parentPB">
+    PC:<input v-model="parentPC">
+    PD:<input v-model="parentPD">
+    PE:<input v-model="parentPE">
+    PF:<input v-model="parentPF">
+    <br/>
+    <span is="example" :prop-a="Number(parentPA)" :prop-b="parentPB" :prop-c="parentPC" :prop-f="parentPF">
+
+    </span>
+</div>
+<script>
+    Vue.component('example', {
+        template: '<span>propA:{{ propA }}, propB:{{ propB }}, propC:{{ propC }}, propD:{{ propD }}, propE:{{ propE }} propF:{{ propF}}</span>',
+        props: {
+            propA: Number,
+            propB: [String, Number],
+            propC: {
+                type: String,
+                required: true
+            },
+            propD: {
+                type: Number,
+                default: 100
+            },
+            propE: {
+                type: Object,
+                default: function () {
+                    return {message: 'hello'};
+                }
+            },
+            propF: {
+                validator: function (value) {
+                    return value > 10;
+                }
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            parentPA: 10,
+            parentPB: 'PB',
+            parentPC: 'PC',
+            parentPD: null,
+            parentPE: null,
+            parentPF: 20
+        }
+    });
+</script>
+</body>
+</html>

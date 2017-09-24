@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 2</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h3>组件全局数据</h3>
+        <global-counter></global-counter>
+        <global-counter></global-counter>
+        <global-counter></global-counter>
+    </div>
+    <div>
+        <h3>组件局部数据</h3>
+        <partial-counter></partial-counter>
+        <partial-counter></partial-counter>
+        <partial-counter></partial-counter>
+    </div>
+</div>
+<script>
+    var data = {counter: 0};
+    Vue.component('global-counter', {
+        template: '<button @click="counter += 1">{{ counter }}</button>',
+        data: function () {
+            return data;
+        }
+    });
+    Vue.component('partial-counter', {
+        template: '<button @click="counter += 1">{{ counter }}</button>',
+        data: function () {
+            return {counter: 0};
+        }
+    });
+    var vm = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

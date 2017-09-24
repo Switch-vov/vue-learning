@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 13</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="parent">
+        <my-component>
+            <template scope="props">
+                <span>hello from parent</span><br/>
+                <span>{{ props.text }}</span>
+            </template>
+        </my-component>
+    </div>
+</div>
+<script>
+    Vue.component('my-component', {
+        template: `<div class="child">
+                     <slot text="hello from child"></slot>
+                   </div>`
+    });
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>

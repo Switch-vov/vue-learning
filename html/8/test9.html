@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 9</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>Checked: {{ check }}</p>
+    <input is="my-checkbox" v-model="check"/> 等价于
+    <input is="my-checkbox" :checked="check" @change-parent="value => check = value"/>
+</div>
+<script>
+    Vue.component('my-checkbox', {
+        model: {
+            prop: 'checked',
+            event: 'change-parent'
+        },
+        props: {
+            checked: Boolean
+        },
+        template: '<input type="checkbox" @change="$emit(\'change-parent\', $event.target.checked)"/>'
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            check: false
+        }
+    });
+</script>
+</body>
+</html>

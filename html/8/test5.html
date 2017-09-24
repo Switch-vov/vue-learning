@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 5</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .red-color {
+            color: red;
+        }
+        .big-font {
+            font-size: 30px;
+        }
+        .blue-color {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <my-component xxx="true" class="big-font blue-color"></my-component>
+</div>
+
+<script>
+    Vue.component("my-component", {
+        template: '<span class="red-color">Component</span>'
+    });
+
+    var vm = new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>

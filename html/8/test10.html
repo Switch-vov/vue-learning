@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 10</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button is="component-b"></button>
+    <p><span is="component-a"></span></p>
+</div>
+
+<script>
+    Vue.component('component-b', {
+        template: '<button @click="sub">提交</button>',
+        methods: {
+            sub: function () {
+                this.$root.Bus.$emit('sendName', 'Switch'.slice(0, parseInt(Math.random() * 7)));
+            }
+        }
+    });
+    Vue.component('component-a', {
+        template: '<span>{{ name }}</span>',
+        data: function () {
+            return {name: 'S'}
+        },
+        created: function () {
+            this.$root.Bus.$on('sendName', value => {this.name = value});
+        },
+        beforeDestroy: function () {
+            this.$root.Bus.$off('sendName');
+        }
+    });
+    new Vue({
+        el: "#app",
+        data: {
+            Bus: new Vue()
+        }
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 15</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .yellow {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <component :is="currentView">
+
+    </component>
+</div>
+
+<script>
+    var yellow = {
+        template: '<p class="yellow">Hello</p>'
+    }
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            currentView: 'red'
+        },
+        components: {
+            red: {
+                template: '<p class="red">Hello</p>'
+            },
+            blue: {
+                template: '<p class="blue">Hello</p>'
+            },
+            green: {
+                template: '<p class="green">Hello</p>'
+            }
+        }
+    });
+</script>
+</body>
+</html>
