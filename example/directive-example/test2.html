@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 2</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        #app div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        #app .hello {
+            background-color: red;
+            top: 0;
+            left: 0;
+        }
+
+        #app .world {
+            background-color: blue;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="hello" v-drag>Switch</div>
+    <div class="world" v-drag>Kitty</div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        directives: {
+            drag: function (el) {
+                el.onmousedown = function (e) {
+                    // 获取鼠标点击处分别与div左边和上边的距离：鼠标位置-div位置
+                    let disX = e.clientX - el.offsetLeft;
+                    let disY = e.clientY - el.offsetTop;
+
+                    // 包含在onmousedown里面，表示点击后才移动，为防止鼠标移除div，使用document.onmouseover
+                    document.onmousemove = function (e) {
+                        // 获取移动后div的位置：鼠标位置-disX/disY
+                        let l = e.clientX - disX;
+                        let t = e.clientY - disY;
+                        el.style.left = l + 'px';
+                        el.style.top = t + 'px';
+                    }
+
+                    // 停止移动
+                    document.onmouseup = function (e) {
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
