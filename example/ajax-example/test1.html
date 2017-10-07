@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 1</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+    <script src="../js/vue-resource.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    username: 'Switch-vov',
+                    user: {
+                        username: 'Switch',
+                        gender: 'male'
+                    },
+                    uid: '',
+                    githubUser: {
+
+                    }
+                },
+                methods: {
+                    send() {
+                        axios({
+                            method: 'get',
+                            url: '../json/user.json'
+                        }).then(resp => {
+                            console.log(resp.data);
+                        }).catch(error => {
+                            console.log('请求失败：' + error.status + ',' + error.statusText)
+                        });
+                    },
+                    sendGet(username) {
+                        axios.get(`https://api.github.com/users/${username}`).then(resp => {
+                            console.log(resp.data);
+                        }).catch(error => {
+                            console.log(error.data);
+                        });
+                    },
+                    sendPost(username) {
+                        axios.post(`https://api.github.com/users/${username}`, this.user, {
+                            transformRequest: [
+                                function (data) {
+                                    let params = '';
+                                    for (let index in data) {
+                                        params += index + '=' + data[index] + '&';
+                                    }
+                                    return params.slice(0, params.length - 1);
+                                }
+                            ]
+                        }).then(resp => {
+                            console.log(resp.data);
+                        }).catch(error => {
+                            console.log(error.data);
+                        });
+                    },
+                    getUserById(uid) {
+                        axios.get(`https://api.github.com/users/${uid}`).then(resp => {
+                            console.log(resp.data);
+                            this.githubUser = resp.data;
+                        }).catch(error => {
+                            console.log(error.data);
+                        });
+                    },
+                    sendJSONP() {
+                        this.$http.jsonp('https://sug.so.360.cn/suggest', {
+                            params: {
+                                word: 'a'
+                            }
+                        }).then(resp => {
+                            console.log(resp.data.s);
+                        });
+                    },
+                    sendJSONPBD() {
+                        this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su', {
+                            params: {
+                                wd: 'a'
+                            },
+                            jsonp: "cb"
+                        }).then(resp => {
+                            console.log(resp.data.s);
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div id="app">
+    <button @click="send">发送AJAX请求</button>
+    <button @click="sendGet(username)">Get方式发送AJAX请求</button>
+    <button @click="sendPost(username)">Post方式发送AJAX请求</button>
+
+    <br/>
+    <br/>
+    GitHub ID： <input type="text" v-model="uid">
+    <button @click="getUserById(uid)">获取指定GitHub账户信息并显示</button>
+    <br/>
+    姓名：{{ githubUser.name }} <br/>
+    头像： <img :src="githubUser.avatar_url" alt="" width="200px" height="200px">
+
+    <br/>
+    <button @click="sendJSONP">向360搜索发送JSONP请求</button>
+    <button @click="sendJSONPBD">向百度搜索发送JSONP请求</button>
+</div>
+</body>
+</html>
