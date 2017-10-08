@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test 4</title>
+    <script src="../resources/js/vue.js"></script>
+    <link rel="stylesheet" href="../resources/css/animate.css">
+    <style>
+        p {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 40px auto;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app" style="border: 1px red solid;">
+    <input type="text" v-model="name">
+    <transition-group enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+        <p v-for="(v,k) in arr2" :key="k" v-show="flag"> {{ v }}</p>
+    </transition-group>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true,
+            arr: ['switch', 'kitty', 'tom', 'jack', 'mark'],
+            name:''
+        },
+        computed: {
+            arr2() {
+                let temp = [];
+                this.arr.forEach(val => {
+                    if (val.includes(this.name)) {
+                        temp.push(val);
+                    }
+                });
+                return temp;
+            }
+        }
+    });
+</script>
+</body>
+</html>
